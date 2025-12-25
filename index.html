@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crush Compass — AI Match</title>
+<meta name="theme-color" content="#0b0b0b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<style>
+:root{--accent:#ff2d55}
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Poppins,sans-serif;
+  background:radial-gradient(circle at top,#1c1c1c,#0b0b0b 65%);
+  color:#f5f5f5;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.container{
+  max-width:420px;
+  width:100%;
+  padding:36px 32px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 25px 70px rgba(0,0,0,.6);
+  text-align:center;
+}
+
+h1{
+  font-size:2.3rem;
+  font-weight:700;
+  letter-spacing:-1px;
+  text-transform:uppercase;
+}
+
+.badge{
+  font-size:11px;
+  opacity:.6;
+  letter-spacing:2px;
+  margin:10px 0 22px;
+}
+
+input{
+  width:100%;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  color:white;
+  margin-bottom:18px;
+  font-size:1rem;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:white;
+  font-size:1.05rem;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 30px rgba(255,45,85,.45);
+  margin-top:8px;
+}
+
+button.secondary{
+  background:#1a1a1a;
+  box-shadow:none;
+}
+
+button:disabled{opacity:.5}
+
+.section{display:none;margin-top:22px}
+
+.meter{display:none;text-align:left}
+.bar{height:8px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#ff7a95);transition:width 1.5s ease}
+
+.result-card{
+  margin-top:20px;
+  padding:18px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+}
+
+.result-card h2{color:var(--accent);white-space:pre-line}
+.rating{font-size:1.3rem;font-weight:700;color:#00ff99;margin-top:8px}
+
+.lock-msg{
+  font-size:.9rem;
+  opacity:.8;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Crush Compass</h1>
+<div class="badge">AI CONNECTION ENGINE</div>
+
+<input id="name" placeholder="Enter your name">
+
+<button id="analyzeBtn" onclick="start()">Analyze Connection</button>
+
+<div class="section meter" id="meter">
+  <div style="font-size:.85rem;margin-bottom:6px">AI Confidence</div>
+  <div class="bar"><span id="bar"></span></div>
+</div>
+
+<div class="section" id="follow">
+  <div>Follow to unlock your result</div>
+  <div class="lock-msg">
+    Instagram:
+    <a href="https://instagram.com/suryaprabhaz" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600">
+      @suryaprabhaz
+    </a>
+  </div>
+  <button class="secondary" onclick="detectFollow()">I Followed</button>
+</div>
+
+<div class="section" id="checking">
+  <div>AI scanning followers…</div>
+</div>
+
+<div class="section" id="resultSection">
+  <div class="result-card" id="resultCard">
+    <h2 id="crush"></h2>
+    <div class="rating" id="rating"></div>
+  </div>
+  <button class="secondary" onclick="share()">Share Now</button>
+</div>
+
+<div class="section" id="lock24">
+  <div>You already checked today.</div>
+  <div class="lock-msg">Try again after 24 hours.</div>
+</div>
+</div>
+
+<script>
+const maleNames=[
+"Aarav","Aaditya","Abhinav","Akash","Akhil","Arjun","Ashwin","Charan","Gaurav","Harsha",
+"Karthik","Krishna","Mahesh","Manoj","Prabhas","Rahul","Rohit","Sandeep","Siddharth",
+"Surya","Varun","Vijay","Yash","Rakesh","Ankit","Nikhil","Vamsi","Teja","Sai","Ravi",
+"Uday","Vinay","Sumanth","Lokesh","Naveen","Kiran","Suresh","Naresh","Pavan","Rohan"
+];
+
+const femaleNames=[
+"Aadhya","Aishwarya","Ananya","Anjali","Bhavya","Divya","Harika","Isha","Kavya","Keerthi",
+"Megha","Nandini","Neha","Priya","Ritika","Shreya","Shruti","Sneha","Tanvi","Zoya",
+"Swathi","Sravya","Pooja","Radhika","Gayatri","Lakshmi","Deepika","Varsha","Keerthana",
+"Chaitra","Navya","Mounika","Siri","Bhargavi","Indu","Jyothi","Rashmi","Sowmya","Preeti"
+];
+
+const hooks=[
+"Someone close to you has feelings…",
+"Your emotional signal is unusually strong",
+"This connection surprised our AI",
+"Hidden attraction detected nearby",
+"Mutual interest probability is high"
+];
+
+const DAY=86400000;
+
+function start(){
+  const name=document.getElementById("name").value.trim();
+  if(!name) return;
+
+  const saved=JSON.parse(localStorage.getItem("cc_result_"+name)||"null");
+  if(saved && Date.now()-saved.time < DAY){
+    document.getElementById("lock24").style.display="block";
+    return;
+  }
+
+  document.getElementById("analyzeBtn").disabled=true;
+  document.getElementById("meter").style.display="block";
+  document.getElementById("bar").style.width=(72+Math.random()*23)+"%";
+
+  setTimeout(()=>{
+    document.getElementById("follow").style.display="block";
+  },2200);
+}
+
+function detectFollow(){
+  document.getElementById("follow").style.display="none";
+  document.getElementById("checking").style.display="block";
+
+  setTimeout(reveal,2200);
+}
+
+function reveal(){
+  document.getElementById("checking").style.display="none";
+
+  const userIsMale=Math.random()>0.5;
+  const list=userIsMale?femaleNames:maleNames;
+  const crush=list[Math.floor(Math.random()*list.length)];
+  const score=80+Math.floor(Math.random()*20);
+  const hook=hooks[Math.floor(Math.random()*hooks.length)];
+
+  document.getElementById("crush").innerText=
+    hook+"\n\nYour Secret Admirer: "+crush;
+  document.getElementById("rating").innerText="Match Confidence: "+score+"%";
+
+  localStorage.setItem("cc_result_"+document.getElementById("name").value,
+    JSON.stringify({time:Date.now(),crush,score}));
+
+  document.getElementById("resultSection").style.display="block";
+}
+
+function share(){
+  html2canvas(document.getElementById("resultCard")).then(canvas=>{
+    canvas.toBlob(blob=>{
+      const file=new File([blob],"crush-result.png",{type:"image/png"});
+      if(navigator.share){
+        navigator.share({
+          title:"Crush Compass",
+          text:"I just found who has a crush on me 👀",
+          files:[file],
+          url:"https://crushcompass.netlify.app/"
+        });
+      }else{
+        const a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download="crush-result.png";
+        a.click();
+      }
+    });
+  });
+}
+</script>
+
+</body>
+</html>
