@@ -1,84 +1,71 @@
 # 💘 CrushCompass
 
-**CrushCompass** is a premium, AI-styled social experiment that simulates discovering who secretly admires you — without real confessions, logins, or data collection.
+**CrushCompass** is a premium, AI-styled social experiment that simulates discovering who might secretly admire you — without real confessions, accounts, or data collection.
 
-It’s designed to feel intelligent, exclusive, and viral, using psychology-driven UX rather than cheap randomness.
+It focuses on **illusion engineering**, **product psychology**, and a clean premium UI to deliver a believable and engaging experience.
 
 ---
 
-## ✨ What Makes It Different
+## ✨ Key Highlights
 
-This is **not** a basic “crush guessing” app.
+This is not a basic “random crush generator”.
 
-CrushCompass uses **illusion engineering** and **product psychology** to create a believable experience.
+CrushCompass is designed to **feel intelligent and exclusive**, using carefully crafted UX flows.
 
-### 🔥 Core Features
+### 🔥 Features
 
-- 🧠 **AI-styled connection analysis**  
-  Subtle confidence meter and delayed reveal for realism  
-
-- 🔒 **Follow-to-Unlock flow**  
-  Instagram verification illusion integrated naturally  
-
-- ⏳ **Daily re-analysis lock (24h)**  
-  Prevents spam and adds seriousness  
-
-- 🎯 **Gender-aware matching (auto-detected)**  
-  Users don’t choose — the system decides  
-
-- 📸 **Result screenshot auto-share**  
-  One-tap sharing with image capture for virality  
-
-- 🚀 **Share-to-spread loop**  
-  Built-in growth without begging or popups  
-
-- 🎨 **Premium dark UI**  
-  Minimal, glassmorphic, distraction-free design  
+- 🧠 AI-styled connection analysis with confidence meter  
+- 🔒 Follow-to-unlock interaction flow  
+- ⏳ Daily re-analysis lock (24-hour cooldown)  
+- 🎯 Automatic gender-aware matching (no user selection)  
+- 📸 Result screenshot generation with one-tap sharing  
+- 🚀 Viral share loop without intrusive prompts  
+- 🎨 Premium dark UI with glassmorphism  
 
 ---
 
 ## 🌐 Live Demo
 
-👉 **Try it here:**  
-🔗 https://crushcompass.netlify.app
+🔗 **https://crushcompass.netlify.app**
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** — single-page architecture  
-- **CSS3** — glassmorphism & premium dark theme  
-- **Vanilla JavaScript** — zero frameworks, full control  
-- **LocalStorage & Session logic** — state persistence  
-- **html2canvas** — screenshot-based sharing  
+- **HTML5**  
+- **CSS3** (glassmorphism, dark UI)  
+- **Vanilla JavaScript**  
+- **LocalStorage / Session logic**  
+- **html2canvas** for result sharing  
 
 ---
 
 ## ⚠️ Disclaimer
 
-CrushCompass is a **simulation for entertainment purposes only**.  
-No real data is collected, stored, or verified.  
-No actual AI or social media data is accessed.
+CrushCompass is built **for entertainment purposes only**.  
+No real AI, no real social-media verification, and no personal data collection is performed.
 
 ---
 
-## 📄 License & Usage
+## 📄 License
 
-**All Rights Reserved.**
+This project is licensed under the **MIT License**.
 
-You may **not**:
-- Reuse
-- Redistribute
+You are free to:
+- Use
 - Modify
-- Clone for deployment
+- Distribute
+- Sell
 
-without **explicit written permission** from the owner.
+as long as the original copyright and license notice are included.
+
+See the [LICENSE](./LICENSE) file for full details.
 
 ---
 
 ## 👤 Author
 
-Built & designed by  
-**Surya Prabhas**  
-🔗 https://github.com/SuryaPrabhaz  
-📸 Instagram: [@suryaprabhaz](https://instagram.com/suryaprabhaz)
+Built & designed by **Surya Prabhas**  
+
+- GitHub: https://github.com/SuryaPrabhaz  
+- Instagram: https://instagram.com/suryaprabhaz  
